@@ -36,7 +36,7 @@ class jpwcai:
             self.reConstructGraph()    
 
     def mecab_analysis(self,text):
-        t = mc.Tagger("-d /usr/lib/mecab/dic/mecab-ipadic-neologd")
+        t = mc.Tagger("-d /usr/lib64/mecab/dic/mecab-ipadic-neologd")
         t.parse('')
         node = t.parseToNode(text) 
         output = []        

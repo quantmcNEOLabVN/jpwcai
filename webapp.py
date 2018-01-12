@@ -4,7 +4,7 @@ import matplotlib
 matplotlib.use('Agg')
 
 import csv
-import tkinter 
+#import Tkinter
 
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
@@ -100,4 +100,5 @@ but.addEventListener("click", function() {
     '''+imgtag
     return html
 
+#app.run(port=80)
 app.run(host='0.0.0.0', port=80)
