@@ -101,4 +101,4 @@ but.addEventListener("click", function() {
     return html
 
 #app.run(port=80)
-app.run(host='0.0.0.0', port=80)
+app.run(host='0.0.0.0', port=80,threaded=True, debug=True)
