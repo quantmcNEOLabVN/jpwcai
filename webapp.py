@@ -1,6 +1,7 @@
 # coding: utf-8
 # -*- coding: utf-8 -*-
-
+import matplotlib
+matplotlib.use('Agg')
 import csv
 #import Tkinter
 
@@ -75,8 +76,8 @@ wcbut.addEventListener("click", function() {
 def tabletag(freq={}):
     def celltag(x):
         return "<td>"+str(x)+"</td>"
-    html='''<p>
-    <table style="width:100%">
+    html='''<p><center>
+    <table border="1", style="table-layout: fixed;" >
   <tr>
     <th>No. </th>
     <th>Word</th> 
@@ -92,7 +93,7 @@ def tabletag(freq={}):
         v=rec[1]
         rows.append("<tr>"+celltag(i)+celltag(w)+celltag(v)+"</tr>")
         i=i+1
-    html=html+("".join(rows))+"</table></p>"
+    html=html+("".join(rows))+"</table></center></p>"
     return html
 
 @app.route('/result/<string:keywords>')
