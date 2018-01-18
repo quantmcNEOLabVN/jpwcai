@@ -84,7 +84,6 @@ class jpwcai:
         addEdge(v,u,w)
     
     def addVocabToGraph(self,vc):
-
         if (vc in self.index):
             return
         self.index[vc]=self.n
@@ -153,7 +152,6 @@ class jpwcai:
     
         
     def saveGraph(self,fileOut="graph_w_tfidf.sav"):
-        
         f=open(fileOut,"w+",encoding="utf-8")
         f.write(str(self.n)+"\n")
         f.write("\n".join(self.vocab))

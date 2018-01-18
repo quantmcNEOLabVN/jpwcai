@@ -1,7 +1,5 @@
 # coding: utf-8
 # -*- coding: utf-8 -*-
-import matplotlib
-matplotlib.use('Agg')
 
 import csv
 #import Tkinter
@@ -72,8 +70,34 @@ wcbut.addEventListener("click", function() {
 </script>
 '''   
 
+
+
+def tabletag(freq={}):
+    def celltag(x):
+        return "<td>"+str(x)+"</td>"
+    html='''<p>
+    <table style="width:100%">
+  <tr>
+    <th>No. </th>
+    <th>Word</th> 
+    <th>Value</th>
+  </tr>
+    '''
+    l=freq.items()
+    i=1;
+    l=sorted(l,key=lambda w: -w[1])
+    rows=[]
+    for rec in l:
+        w=rec[0]
+        v=rec[1]
+        rows.append("<tr>"+celltag(i)+celltag(w)+celltag(v)+"</tr>")
+        i=i+1
+    html=html+("".join(rows))+"</table></p>"
+    return html
+
 @app.route('/result/<string:keywords>')
 def resultPage(keywords=None):
+    mecabtag="<p>Mecab analysis: '"+keywords+"'</p> <p>-->   "+str(myAI.mecab_analysis(keywords))+'</p>'
     if ((keywords==None) or (keywords=="")):
         return'''<p><button onclick="window.history.back()">戻る</button></p>'''
     print("input: %s" %keywords)
@@ -82,12 +106,14 @@ def resultPage(keywords=None):
     imgtag=""
     if (freq=={}):
         imgtag= '<p> No result for this keywords.</p>'
+        
     else:
         base64_img = gen_wordcloud(freq)
         imgtag= '<img src="data:image/png;base64,%s"/>' % base64_img
     
-    capt="<p>This is the result for the input '%s' </p>" %keywords
-    html='''
+    capt="<title>This is the result for the input '%s' </title>" %keywords
+    
+    html=capt+'''
     <p><button id=buttonBack>戻る</button></p>
 <script>
 var but=document.getElementById("buttonBack");
@@ -97,7 +123,7 @@ but.addEventListener("click", function() {
     window.location =link;
   });
 </script>
-    '''+imgtag
+    '''+imgtag+mecabtag+tabletag(freq)
     return html
 
 #app.run(port=80)
