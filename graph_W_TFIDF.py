@@ -1,11 +1,8 @@
 # coding: utf-8
 # -*- coding: utf-8 -*-
 import csv
-
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-from bs4 import BeautifulSoup
-import requests
 import MeCab as mc
 import math
 
@@ -52,7 +49,6 @@ class jpwcai:
             if node is None:
                 break
         return output
-    
     
     def create_wordcloud(self,freq={}):
         if (freq=={}):

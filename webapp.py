@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import matplotlib
 matplotlib.use('Agg')
-import csv
 #import Tkinter
 
 import matplotlib.pyplot as plt
@@ -76,12 +75,12 @@ wcbut.addEventListener("click", function() {
 def tabletag(freq={}):
     def celltag(x):
         return "<td>"+str(x)+"</td>"
-    html='''<p><center>
+    html='''<p>
     <table border="1", style="table-layout: fixed;" >
   <tr>
-    <th>No. </th>
-    <th>Word</th> 
-    <th>Value</th>
+    <th>ID.</th>
+    <th>単語</th> 
+    <th>関連性</th>
   </tr>
     '''
     l=freq.items()
@@ -93,12 +92,11 @@ def tabletag(freq={}):
         v=rec[1]
         rows.append("<tr>"+celltag(i)+celltag(w)+celltag(v)+"</tr>")
         i=i+1
-    html=html+("".join(rows))+"</table></center></p>"
+    html=html+("".join(rows))+"</table></p>"
     return html
 
 @app.route('/result/<string:keywords>')
 def resultPage(keywords=None):
-    mecabtag="<p>Mecab analysis: '"+keywords+"'</p> <p>-->   "+str(myAI.mecab_analysis(keywords))+'</p>'
     if ((keywords==None) or (keywords=="")):
         return'''<p><button onclick="window.history.back()">戻る</button></p>'''
     print("input: %s" %keywords)
@@ -124,7 +122,7 @@ but.addEventListener("click", function() {
     window.location =link;
   });
 </script>
-    '''+imgtag+mecabtag+tabletag(freq)
+    '''+imgtag+"<p> </p> <p> </p>"+tabletag(freq)
     return html
 
 #app.run(port=80)
